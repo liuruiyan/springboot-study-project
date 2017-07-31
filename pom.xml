@@ -9,15 +9,6 @@
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
 
-
-    <!-- Spring Boot 启动父依赖 -->
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>1.5.1.RELEASE</version>
-    </parent>
-
-
     <repositories>
         <repository>
             <id>worldunion-nexus</id>
@@ -34,10 +25,131 @@
     </pluginRepositories>
 
 
+    <properties>
+        <springboot.version>1.5.2.RELEASE</springboot.version>
+        <oracle_version>10.2.0.3.0</oracle_version>
+        <mybatis-spring-boot>1.2.0</mybatis-spring-boot>
+        <mysql-connector>5.1.39</mysql-connector>
+    </properties>
+
+    <!-- Spring Boot 启动父依赖 -->
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>1.5.2.RELEASE</version>
+    </parent>
+
+
     <modules>
-        <module>springboot-web</module>
         <module>springboot-utils</module>
+        <module>springboot-mybatis</module>
+        <module>springboot-service</module>
+        <module>springboot-web</module>
+        <module>springboot-properties</module>
     </modules>
 
+
+    <dependencyManagement>
+        <dependencies>
+
+            <!-- 不使用parent spring-boot-starter-parent， 从Spring Boot引入依赖管理 -->
+            <!--<dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${springboot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>-->
+
+
+            <dependency>
+                <groupId>springboot.study.project</groupId>
+                <artifactId>springboot-web</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>springboot.study.project</groupId>
+                <artifactId>springboot-service</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>springboot.study.project</groupId>
+                <artifactId>springboot-mybatis</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>springboot.study.project</groupId>
+                <artifactId>springboot-utils</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+
+            <dependency>
+                <groupId>springboot.study.project</groupId>
+                <artifactId>springboot-properties</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+
+            <!-- Spring Boot Mybatis 依赖 -->
+            <dependency>
+                <groupId>org.mybatis.spring.boot</groupId>
+                <artifactId>mybatis-spring-boot-starter</artifactId>
+                <version>${mybatis-spring-boot}</version>
+            </dependency>
+
+            <!-- MySQL 连接驱动依赖 -->
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql-connector}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>oracle</groupId>
+                <artifactId>ojdbc14</artifactId>
+                <version>${oracle_version}</version>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
+
+
+
+    <build>
+
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>1.3.0.RELEASE</version>
+                <configuration>
+                    <mainClass>com.springboot.web.Application</mainClass>
+                    <layout>ZIP</layout>
+                </configuration>
+
+                <!--不使用parent spring-boot-starter-parent，
+                从Spring Boot引入依赖管理则需要添加spring-boot-maven-plugin 版本等明细信息-->
+                <!--<version>${springboot.version}</version> -->
+
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal><!--可以把依赖的包都打包到生成的Jar包中-->
+                        </goals>
+                        <!--可以生成不含依赖包的不可执行Jar包-->
+                        <!-- configuration>
+                          <classifier>exec</classifier>
+                        </configuration> -->
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+
+
+    </build>
 
 </project>

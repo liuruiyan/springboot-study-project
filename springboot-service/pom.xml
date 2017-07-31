@@ -6,21 +6,24 @@
         <version>1.0-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
-
-
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>springboot-utils</artifactId>
+
+    <artifactId>springboot-service</artifactId>
     <!--<packaging>jar</packaging>-->
 
-    <name>springboot-utils utils模块</name>
+    <name>springboot-service</name>
     <url>http://maven.apache.org</url>
-
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
     <dependencies>
+
+        <dependency>
+            <groupId>springboot.study.project</groupId>
+            <artifactId>springboot-mybatis</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>junit</groupId>

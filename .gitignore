@@ -6,3 +6,7 @@ SpringBootStudyProject.iml
 springboot-utils/springboot-utils.iml
 springboot-web/springboot-web.iml
 .DS_Store
+springboot-mybatis/springboot-mybatis.iml
+springboot-properties/springboot-properties.iml
+springboot-service/springboot-service.iml
+springboot-utils/src/main/java/springboot/study/project/App.java
